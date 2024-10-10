@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">                            
+    <title>Tienda Deportiva - Giuliano Gerlo</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+
+    <h1>Gestión de Stock</h1>
+
+    <div class="container">
+        <div id="gestionarStock">
+            <h2><b>Agregar, eliminar o actualizar <i>articulos</i></b></h2>
+            <input type="text" id="nombreArticulo" placeholder="Nombre del artículo">
+            <input type="number" id="precioArticulo" placeholder="Precio del artículo">
+            <input type="number" id="cantidadArticulo" placeholder="Cantidad del artículo">
+            <button id="btnAgregar">Agregar articulo</button>
+            <button id="btnEliminar">Eliminar stock</button>
+            <button id="btnModificar">Actualizar precio</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody id="tablaBody">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="resultados"></div>
+
+    <!-- SCRIPTS JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>

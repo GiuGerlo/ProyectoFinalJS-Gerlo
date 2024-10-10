@@ -1,0 +1,87 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #e1e1e1;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.container {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#gestionarStock {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+input {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 75%;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: #ff0000;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #000000;
+}
+
+#resultados {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e7f1ff;
+    border-radius:10px;
+    width: 100%;
+    text-align: center;
+    color: black;
+    width: 50%;
+}
+
+#resultados:empty {
+    display: none;
+}
+
+table {
+    width: 45%; 
+    border-collapse: collapse;
+    margin-left: 20px; 
+}
+
+table th, table td {
+    border: 2px solid black;
+    padding: 10px;
+    text-align: left;
+    color: black;
+}
+
+thead {
+    background-color: red;
+    color: white;
+}
