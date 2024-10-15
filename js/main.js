@@ -112,7 +112,7 @@ let listaArticulos = JSON.parse(localStorage.getItem('listaArticulos')) || [];
 
 // Cargamos el JSON si no hay articulos
 if (listaArticulos.length === 0) {
-    fetch('./articulos.json')
+    fetch('/js/articulos.json')
         .then((response) => response.json())
         .then((data) => {
             listaArticulos = data.map(item => new Articulo(item.nombre, item.precio, item.cantidad));
@@ -125,12 +125,12 @@ if (listaArticulos.length === 0) {
 }
 
 // Mensaje de bienvenida
-fetch('./mensaje.json')
+fetch('/js/mensaje.json')
     .then((response) => response.json())
     .then((data) => {
         mostrarResultado(data.mensaje, 'info');
     })
-    .catch(error => console.error('Error al cargar el mensaje de bienvenida:', error));
+    .catch((error) => console.error('Error al cargar el mensaje de bienvenida:', error));
 
 // Eventos
 document.getElementById('btnAgregar').addEventListener('click', agregarArticulo);
