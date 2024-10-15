@@ -1,7 +1,7 @@
 [
-    { "nombre": "botines", "precio": 50, "cantidad": 50 },
-    { "nombre": "zapatillas", "precio": 40, "cantidad": 23 },
-    { "nombre": "buzos", "precio": 60, "cantidad": 6 },
-    { "nombre": "medias", "precio": 10, "cantidad": 40 },
-    { "nombre": "canilleras", "precio": 8, "cantidad": 10 }
+    { "nombre": "botines", "precio": 50, "cantidad": 100 },
+    { "nombre": "zapatillas", "precio": 40, "cantidad": 80 },
+    { "nombre": "buzos", "precio": 60, "cantidad": 25 },
+    { "nombre": "medias", "precio": 10, "cantidad": 200 },
+    { "nombre": "canilleras", "precio": 8, "cantidad": 50 }
 ]

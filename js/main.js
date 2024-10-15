@@ -1,17 +1,10 @@
-// CLASES
+// Clases
 class Articulo {
     constructor(nombre, precio, cantidad) {
         this.nombre = nombre.toLowerCase();
         this.precio = precio;
         this.cantidad = cantidad;
     }
-}
-
-// FUNCIONES
-
-// Enviar articulos a LS
-function enviarLS() {
-    localStorage.setItem('listaArticulos', JSON.stringify(listaArticulos));
 }
 
 // Renderizar tabla
@@ -30,7 +23,7 @@ function actualizarTabla() {
     });
 }
 
-// Agregar articulos
+// Agregar artículos
 function agregarArticulo() {
     const nombre = document.getElementById('nombreArticulo').value.toLowerCase();
     const precio = parseFloat(document.getElementById('precioArticulo').value);
@@ -42,15 +35,15 @@ function agregarArticulo() {
         mostrarResultado(`El articulo ${nombre} ya existe`, 'warning');
     } else if (nombre && precio > 0 && cantidad > 0) {
         listaArticulos.push(new Articulo(nombre, precio, cantidad));
-        enviarLS();
-        mostrarResultado(`Se agrego el articulo: ${nombre} - precio: $${precio} - cantidad: ${cantidad}`, 'success');
+        localStorage.setItem('listaArticulos', JSON.stringify(listaArticulos));
+        mostrarResultado(`Se agregó el articulo: ${nombre} - precio: $${precio} - cantidad: ${cantidad}`, 'success');
         actualizarTabla();
     } else {
-        mostrarResultado("Faltan datos o estan incorrectos, intenta otra vez", 'error');
+        mostrarResultado("Faltan datos o están incorrectos, intenta otra vez", 'error');
     }
 }
 
-// Eliminar articulos
+// Eliminar artículos
 function eliminarArticulo() {
     const nombre = document.getElementById('nombreArticulo').value.toLowerCase();
     const cantidad = parseInt(document.getElementById('cantidadArticulo').value);
@@ -73,15 +66,15 @@ function eliminarArticulo() {
                 if (articuloEncontrado.cantidad === 0) {
                     listaArticulos = listaArticulos.filter(item => item.nombre !== nombre);
                 }
-                enviarLS();
-                mostrarResultado(`Se elimino ${cantidad} del stock de ${nombre}`, 'success');
+                localStorage.setItem('listaArticulos', JSON.stringify(listaArticulos));
+                mostrarResultado(`Se eliminó ${cantidad} del stock de ${nombre}`, 'success');
                 actualizarTabla();
             } else {
-                mostrarResultado('Se cancelo la operacion', 'info');
+                mostrarResultado('Se canceló la operación', 'info');
             }
         });
     } else {
-        mostrarResultado("No se encontro el articulo o la cantidad es invalida", 'error');
+        mostrarResultado("No se encontró el artículo o la cantidad es inválida", 'error');
     }
 }
 
@@ -94,7 +87,7 @@ function modificarPrecio() {
 
     if (articuloEncontrado && nuevoPrecio > 0) {
         articuloEncontrado.precio = nuevoPrecio;
-        enviarLS();
+        localStorage.setItem('listaArticulos', JSON.stringify(listaArticulos));
         mostrarResultado(`Se modificó el precio de ${nombre} a $${nuevoPrecio}`, 'success');
         actualizarTabla();
     } else {
@@ -114,18 +107,30 @@ function mostrarResultado(mensaje, tipo) {
 
 // INICIO DEL PROGRAMA
 
-// Inicializar la lista de artículos
-let listaArticulos = [];
+// Inicializar la lista de artículos desde LS
+let listaArticulos = JSON.parse(localStorage.getItem('listaArticulos')) || [];
 
-//Cargar los datos de un JSON
-fetch('/js/articulos.json')
+// Cargamos el JSON si no hay articulos
+if (listaArticulos.length === 0) {
+    fetch('/js/articulos.json')
+        .then(response => response.json())
+        .then(data => {
+            listaArticulos = data.map(item => new Articulo(item.nombre, item.precio, item.cantidad));
+            localStorage.setItem('listaArticulos', JSON.stringify(listaArticulos));
+            actualizarTabla();
+        })
+        .catch(error => console.error('Error al cargar los datos:', error));
+} else {
+    actualizarTabla();
+}
+
+// Mensaje de bienvenida
+fetch('/js/mensaje.json')
     .then(response => response.json())
     .then(data => {
-        listaArticulos = data.map(item => new Articulo(item.nombre, item.precio, item.cantidad));
-        enviarLS();
-        actualizarTabla();
+        mostrarResultado(data.mensaje, 'info');
     })
-    .catch(error => console.error('Error al cargar los datos:', error));
+    .catch(error => console.error('Error al cargar el mensaje de bienvenida:', error));
 
 // Eventos
 document.getElementById('btnAgregar').addEventListener('click', agregarArticulo);
